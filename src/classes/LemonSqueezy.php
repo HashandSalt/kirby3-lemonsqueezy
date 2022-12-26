@@ -53,8 +53,8 @@ class Squeezy {
         
     }
 
-        /**
-     * Fetche Single Store
+    /**
+     * Fetch Single Store
      *
 
      * @return array
@@ -69,7 +69,7 @@ class Squeezy {
     }
 
 
-        /**
+    /**
      * Fetches Lsst of Products
      *
 
@@ -84,8 +84,8 @@ class Squeezy {
         
     }
 
-        /**
-     * Fetche Single Product
+    /**
+     * Fetch Single Product
      *
 
      * @return array

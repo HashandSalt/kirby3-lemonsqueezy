@@ -16,10 +16,15 @@ Kirby::plugin('hashandsalt/lemonsqueezy', [
 
 
     'options' => [
-     
+        'cache.products' => true,
         'template' => kirby()->option('hashandsalt.lemonsqueezy.template'),
         'model' => kirby()->option('hashandsalt.lemonsqueezy.model')
 		
+	],
+
+    'blueprints' => [
+		'product'    => __DIR__ . '/blueprints/pages/product.yml',
+
 	],
 
 	'pageModels' => [
