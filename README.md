@@ -1,6 +1,8 @@
+# WARNING This plugin is shiny new beta! Use with caution and please feedback any issues via Github issues if you have any problems.  
+
 # Kirby3 Lemon Squeezy
 
-A plugin for working with the Lemon Squeezy API.
+A plugin for working with the Lemon Squeezy API. 
 
 Features
 
@@ -15,13 +17,12 @@ Add your API keys to the `Config.php`
 
 ```
 // API Keys
-'hashandsalt.lemonsqueezy.testmode' => true,
+'hashandsalt.lemonsqueezy.testmode' => true, // flick to false in to use the live API
 'hashandsalt.lemonsqueezy.testapikey' => 'XXX',
 'hashandsalt.lemonsqueezy.liveapikey' => 'XXX'
 ```
 
 Change the default template and model for the virtual pages (optional)
-
 
 ```
 // Virtual Pages
@@ -51,10 +52,10 @@ $store = $page->store('11087');
 An array of all products
 
 ```
-$stores = $page->products();
+$products = $page->products();
 ```
 
-A specific products by ID
+A specific product by ID
 
 ```
 $product = $page->product('22352');
