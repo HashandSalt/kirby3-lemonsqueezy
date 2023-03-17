@@ -45,12 +45,8 @@ class ProductsPage extends Page
 
 
           }
-        
-        
 
-
-          foreach ($apiData  as $key => $productitem) {        
-           
+          foreach ($apiData  as $key => $productitem) {                 
   
     
           $key++;

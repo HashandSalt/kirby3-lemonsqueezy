@@ -44,9 +44,9 @@ Kirby::plugin('hashandsalt/lemonsqueezy', [
             return $init->store($id);
         },
 
-		'products' => function () {
+		'products' => function ($id) {
             $init = new Squeezy();
-            return $init->products();
+            return $init->products($id);
         },
 		'product' => function ($id) {
             $init = new Squeezy();

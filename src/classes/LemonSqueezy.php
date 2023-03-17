@@ -75,12 +75,24 @@ class Squeezy {
 
      * @return mixed
      */
-    public function products()
+    public function products($id)
     {
-  
-        $products = self::endpoint('products')->content;
-        $list = json_decode($products);
+   
+        $products = self::endpoint('products?store_id=11885')->content;
+        $list = json_decode($products)->data;
+
+    //     if ($id !== null) {
+    //     $storeid = $id !== null ? $id : kirby()->option('hashandsalt.lemonsqueezy.storeID');
+    //     $products = self::endpoint('products?store_id='.$storeid)->content;
+    //     $list = json_decode($products)->data;
+    // } else {
+    //     $products = self::endpoint('products')->content;
+    //     $list = json_decode($products)->data;
+    // }
+        
+        
         return $list;
+
         
     }
 
