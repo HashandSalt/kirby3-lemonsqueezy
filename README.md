@@ -10,6 +10,13 @@ Features
 * Fetch Product(s)
 * Turns products into virtual pages 
 
+ææ Install
+
+```
+composer require hashandsalt/lemonsqueezy
+```
+
+You can also install manually by placing the folder inside your plugins folder.
 
 ## Config
 
@@ -37,13 +44,13 @@ Change the default template and model for the virtual pages (optional)
 An array of all stores
 
 ```
-$stores = $page->stores();
+$stores = $site->stores();
 ```
 
 A specific store by ID
 
 ```
-$store = $page->store('11087');
+$store = $site->store('11087');
 ```
 
 ### Fetching product data
@@ -52,13 +59,13 @@ $store = $page->store('11087');
 An array of all products
 
 ```
-$products = $page->products();
+$products = $site->products();
 ```
 
 A specific product by ID
 
 ```
-$product = $page->product('22352');
+$product = $site->product('22352');
 ```
 
 ## Virtual Pages
