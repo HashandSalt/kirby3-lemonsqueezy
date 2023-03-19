@@ -11,13 +11,13 @@ class Squeezy {
 
     
 
-    public function endpoint($end)
+    public function endpoint($end, $cacheName)
     {
     $url = 'https://api.lemonsqueezy.com/v1/' . $end;
  
     $key = kirby()->option('hashandsalt.lemonsqueezy.testmode') === true ? kirby()->option('hashandsalt.lemonsqueezy.testapikey') : kirby()->option('hashandsalt.lemonsqueezy.liveapikey') ;
         
-    $data = '';
+    $data = null;
     $options = [
         'headers' => [
              'Authorization: Bearer ' . $key,
@@ -27,14 +27,30 @@ class Squeezy {
         'method'  => 'GET',
         'data'    => json_encode($data)
      ];
+
+    $cacheName = 'hashandsalt.lemonsqueezy.' . $cacheName;
+
+    $apiCache = kirby()->cache($cacheName);
+    $apiData  = $apiCache->get($cacheName);
+
     $request = Remote::request($url, $options);
     
-    if ($request->code() === 200) {
-        $data = $request;
-    }
 
 
-    return $data;
+    if ($apiData === null) {   
+          
+
+        if ($request->code() === 200) {
+            $data = $request;
+            $data = json_decode($data->content);
+            $apiCache->set($cacheName, $data);
+        }
+
+
+      } 
+
+
+    return $apiData;
       
     }
 
@@ -47,9 +63,9 @@ class Squeezy {
     public function stores()
     {
   
-        $stores = self::endpoint('stores')->content;
-        $list = json_decode($stores)->data;
-        return $list;
+        $stores = self::endpoint('stores', 'stores');
+      
+        return $stores;
         
     }
 
@@ -61,10 +77,10 @@ class Squeezy {
      */
     public function store($id)
     {
-  
-        $data = self::endpoint('stores/'.$id)->content;
+        
+        $store = self::endpoint('stores/'. $id, 'store');
     
-        return json_decode($data)->data;
+        return $store;
         
     }
 
@@ -75,25 +91,16 @@ class Squeezy {
 
      * @return mixed
      */
-    public function products($id)
+    public function products($id, $cacheName)
     {
-   
-        $products = self::endpoint('products?store_id=11885')->content;
-        $list = json_decode($products)->data;
-
-    //     if ($id !== null) {
-    //     $storeid = $id !== null ? $id : kirby()->option('hashandsalt.lemonsqueezy.storeID');
-    //     $products = self::endpoint('products?store_id='.$storeid)->content;
-    //     $list = json_decode($products)->data;
-    // } else {
-    //     $products = self::endpoint('products')->content;
-    //     $list = json_decode($products)->data;
-    // }
-        
-        
-        return $list;
-
-        
+        if ($id === null) {
+            $products = self::endpoint('products', $cacheName);
+        } else {
+            $end = '?filter[store_id]='.$id;
+            $cache = $cacheName . '_' . $id;
+            $products = self::endpoint($end, $cache);
+        }
+        return $products;        
     }
 
     /**
@@ -104,10 +111,10 @@ class Squeezy {
      */
     public function product($id)
     {
-  
-        $product = self::endpoint('products/'.$id)->content;
+        $cache = 'product';
+        $product = self::endpoint('products/'.$id, $cache);
     
-        return json_decode($product);
+        return $product;
         
     }
 }

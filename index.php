@@ -17,9 +17,11 @@ Kirby::plugin('hashandsalt/lemonsqueezy', [
 
     'options' => [
         'cache.products' => true,
+        'cache.product' => true,
+        'cache.stores' => true,
+        'cache.store' => true,
         'template' => kirby()->option('hashandsalt.lemonsqueezy.template'),
-        'model' => kirby()->option('hashandsalt.lemonsqueezy.model')
-		
+        'model' => kirby()->option('hashandsalt.lemonsqueezy.model')		
 	],
 
     'blueprints' => [
@@ -34,7 +36,7 @@ Kirby::plugin('hashandsalt/lemonsqueezy', [
 
 
     # Page methods
-    'pageMethods' => [
+    'siteMethods' => [
         'stores' => function () {
             $init = new Squeezy();
             return $init->stores();
@@ -44,9 +46,9 @@ Kirby::plugin('hashandsalt/lemonsqueezy', [
             return $init->store($id);
         },
 
-		'products' => function ($id) {
+		'products' => function ($id = null) {
             $init = new Squeezy();
-            return $init->products($id);
+            return $init->products($id, 'products');
         },
 		'product' => function ($id) {
             $init = new Squeezy();
