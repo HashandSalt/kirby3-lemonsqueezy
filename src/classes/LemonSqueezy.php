@@ -13,6 +13,8 @@ class Squeezy {
 
     public function endpoint($end, $cacheName)
     {
+
+
     $url = 'https://api.lemonsqueezy.com/v1/' . $end;
  
     $key = kirby()->option('hashandsalt.lemonsqueezy.testmode') === true ? kirby()->option('hashandsalt.lemonsqueezy.testapikey') : kirby()->option('hashandsalt.lemonsqueezy.liveapikey') ;
@@ -30,15 +32,16 @@ class Squeezy {
 
     $cacheName = 'hashandsalt.lemonsqueezy.' . $cacheName;
 
+
     $apiCache = kirby()->cache($cacheName);
     $apiData  = $apiCache->get($cacheName);
 
-    $request = Remote::request($url, $options);
+  
     
 
 
     if ($apiData === null) {   
-          
+        $request = Remote::request($url, $options);
 
         if ($request->code() === 200) {
             $data = $request;
@@ -97,8 +100,7 @@ class Squeezy {
             $products = self::endpoint('products', $cacheName);
         } else {
             $end = '?filter[store_id]='.$id;
-            $cache = $cacheName . '_' . $id;
-            $products = self::endpoint($end, $cache);
+            $products = self::endpoint($end, $cacheName);
         }
         return $products;        
     }

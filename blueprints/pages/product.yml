@@ -1,35 +1,33 @@
 title: Product
 
-
 columns:
   # MAIN
   left:
-    width:        2/3
+    width: 2/3
     sections:
       # IMAGE FILES
       pdescription:
         headline: description
-        type:     fields
+        type: fields
         fields:
           description:
             type: writer
             disabled: true
 
   right:
-    width:        1/3
+    width: 1/3
     sections:
       # IMAGE FILES
       details:
         headline: Details
-        type:     fields
+        type: fields
         fields:
-
-          product_status:
+          productstatus:
             type: text
             label: Lemon Squeezy Status
             disabled: true
 
-          formatted_price:
+          formattedprice:
             type: text
             label: Price
             disabled: true
